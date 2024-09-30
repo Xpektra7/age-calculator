@@ -15,7 +15,7 @@
   --red:hsl(0, 100%, 67%);
 }
 html{
-  color-scheme: dark;
+  color-scheme: light;
 }
 *{
   margin: 0;
@@ -24,15 +24,16 @@ html{
   font-family: "Poppins-Bold";
 }
 body{
-  background-color: #0c0c0c;
+  background-color:hsl(0, 0%, 94%);
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .container{
-  background-color:black;
+  background-color:rgb(255, 255, 255);
   width: 600px;
   padding: 3rem;
   border-radius:20px;
@@ -54,6 +55,7 @@ body{
   flex-direction: column;
   color: grey;
   position: relative;
+  gap: .3rem;
 }
 #form .input label{
   font-size: smaller;
@@ -71,8 +73,13 @@ body{
   padding-right: 0;
   outline: none;
   box-shadow: none;
-  margin-bottom: 25px;
+  border: 1px solid grey;
+  -moz-appearance: textfield;
 
+  &::-webkit-inner-spin-button,&::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   &:focus{
     border-color: var(--purple);
@@ -87,10 +94,10 @@ body{
   font-family: "Poppins";
   font-weight: lighter;
   font-style: italic;
-  position: absolute;
-  bottom: 0;
   text-wrap: nowrap;
   color: var(--red);
+  font-size: .7rem;
+  height: 1rem;
 }
 #form button{
   background-color: var(--purple);
@@ -139,6 +146,7 @@ body{
     gap: 1em;
     margin-inline: auto;
     width: fit-content;
+    height: max-content;
     padding-bottom: 3em;
   }
   #form .input input{
@@ -159,6 +167,12 @@ body{
   }
   .results p span{
     font-size: 1em;
+  }
+  #form .input small{
+    text-wrap: wrap;
+    color: var(--red);
+    font-size: .7rem;
+   
   }
   
 }

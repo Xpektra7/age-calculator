@@ -31,35 +31,38 @@ form.addEventListener("submit", (e) => {
 
 function validateInput() {
 
-  checkBlank(day);
-  checkBlank(month);
-  checkBlank(year);
 
-
-  if (month.value < 1 || month.value > 12) {
-    setError(month,"Invalid Month")
+  if (month.value > 12) {
+    setError(month,"Must be a valid month")
   } 
+  else if(month.value == 0){
+    setError(month,"This field is required.");
+  }
   else {
     setSuccess(month);
   };
 
   if (year.value < 1) {
-    setError(year,"Invalid Year")
+    setError(year,"This field is required.");
   }
   else if(year.value > currentYear ) {
-    setError(year,"Year must be in past")
-  } else {
+    setError(year,"Year must be in past");
+  }
+   else {
     setSuccess(year);
   };
 
-  if(day.value> 31 || day.value < 1){
-    setError(day,"Invalid date!");
+  if(day.value> 31){
+    setError(day,"Must be a valid day");
+  }
+  else if(day.value === ""){
+    setError(day,"This field is required.")
   }
   else if((month.value == (9 || 4 || 6 || 11)) & (day.value > 30)){
-    setError(day,"Invalid date!");
+    setError(day,"Must be a valid day");
   }
   else if((month.value == 2) & (day.value > 29)){
-    setError(day,"Invalid date!");
+    setError(day,"Must be a valid day");
   }
   else{
     setSuccess(day);
@@ -79,13 +82,6 @@ function setError(object,message) {
 function setSuccess(object) {
   object.parentElement.classList.remove('error');
   object.nextElementSibling.innerHTML= "";
-}
-function checkBlank(value) {
-  if(value.value === ""){
-    setError(value,"Cannot be blank!")
-  } else {
-    setSuccess(value);
-  } ;
 }
 function calculateAge() {
   
