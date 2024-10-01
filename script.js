@@ -84,27 +84,38 @@ function setSuccess(object) {
   object.nextElementSibling.innerHTML= "";
 }
 function calculateAge() {
-  
-
-  validateInput();
+  validateInput(); // Call to your validation function
 
   const yearValue = year.value;
   const monthValue = month.value;
   const dayValue = day.value;
 
-
   if (validateInput()) {
-    const birthTime = new Date(yearValue,monthValue-1,dayValue);
-    
-    let diff = currentTime - birthTime;
-    const age = Math.floor(diff / (1000 * 60 * 60 * 24))
-    let yearAge = Math.floor(age / 365);;
-    const remainingDaysAfterYears = age % 365;
-    let monthAge = Math.floor(remainingDaysAfterYears / 30);
-    let dayAge = remainingDaysAfterYears % 30;
-   
+    const birthTime = new Date(yearValue, monthValue - 1, dayValue);
+    const currentTime = new Date(); // Assuming this exists
+
+    // Calculate the difference in years, months, and days
+    let yearAge = currentTime.getFullYear() - birthTime.getFullYear();
+    let monthAge = currentTime.getMonth() - birthTime.getMonth();
+    let dayAge = currentTime.getDate() - birthTime.getDate();
+
+    // Adjust month and day if the current date is earlier in the month/year
+    if (dayAge < 0) {
+      // Go to the previous month and adjust the day difference
+      const previousMonth = new Date(currentTime.getFullYear(), currentTime.getMonth(), 0);
+      dayAge += previousMonth.getDate(); // Add the days from the previous month
+      monthAge--;
+    }
+
+    if (monthAge < 0) {
+      // If the current month is earlier than the birth month, adjust year and month difference
+      monthAge += 12; // Add 12 to month difference
+      yearAge--; // Decrease the year by 1
+    }
+
+    // Output the results without changing your HTML
     ageYear.innerHTML = yearAge;
     ageMonth.innerHTML = monthAge;
     ageDay.innerHTML = dayAge;
-  }       
-}  
+  }
+}
